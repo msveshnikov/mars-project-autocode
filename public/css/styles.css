@@ -1,0 +1,227 @@
+/* Base styles */
+:root {
+  --primary-color: #ff4500;
+  --secondary-color: #8b4513;
+  --background-color: #f4f4f4;
+  --text-color: #333;
+  --header-height: 60px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+/* Header styles */
+header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+}
+
+nav ul li {
+  margin-right: 1rem;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--secondary-color);
+}
+
+#language-selector {
+  margin-left: auto;
+}
+
+/* Main content styles */
+main {
+  padding-top: calc(var(--header-height) + 2rem);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+/* Mars terrain visualization */
+#scene-container {
+  width: 100%;
+  height: 400px;
+  background-color: #000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Weather simulation */
+#weather-display {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+#weather-display p {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(255, 69, 0, 0.1);
+  border-radius: 3px;
+}
+
+/* Mars facts */
+#facts-list {
+  list-style-type: none;
+}
+
+#facts-list li {
+  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+  background-color: rgba(139, 69, 19, 0.1);
+  border-radius: 3px;
+}
+
+/* Data visualization */
+#chart-container {
+  width: 100%;
+  height: 300px;
+}
+
+/* Footer styles */
+footer {
+  background-color: var(--primary-color);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  header {
+    flex-direction: column;
+    height: auto;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav ul li {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  #language-selector {
+    margin-left: 0;
+    margin-top: 1rem;
+  }
+
+  main {
+    padding-top: 2rem;
+  }
+
+  #scene-container {
+    height: 300px;
+  }
+}
+
+/* Accessibility features */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus styles for keyboard navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #ff0000;
+    --secondary-color: #8b0000;
+    --background-color: #ffffff;
+    --text-color: #000000;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Progressive enhancement */
+.no-js .js-required {
+  display: none;
+}
+
+/* Print styles */
+@media print {
+  header, footer, #scene-container {
+    display: none;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  main {
+    padding-top: 0;
+  }
+}

@@ -7,53 +7,56 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#FF0000">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/"><%= t('home') %></a></li>
-                <li><a href="/explore"><%= t('explore') %></a></li>
-                <li><a href="/weather"><%= t('weather') %></a></li>
-                <li><a href="/account"><%= t('account') %></a></li>
+<body class="bg-gray-100">
+    <header class="bg-red-800 text-white p-4">
+        <nav class="container mx-auto flex justify-between items-center">
+            <ul class="flex space-x-4">
+                <li><a href="/" class="hover:text-gray-300"><%= t('home') %></a></li>
+                <li><a href="/explore" class="hover:text-gray-300"><%= t('explore') %></a></li>
+                <li><a href="/weather" class="hover:text-gray-300"><%= t('weather') %></a></li>
+                <li><a href="/account" class="hover:text-gray-300"><%= t('account') %></a></li>
             </ul>
+            <div id="language-selector">
+                <select id="language" class="bg-red-700 text-white p-2 rounded">
+                    <option value="en">English</option>
+                    <option value="es">Español</option>
+                    <option value="fr">Français</option>
+                    <option value="de">Deutsch</option>
+                    <option value="zh">中文</option>
+                    <option value="ar">العربية</option>
+                </select>
+            </div>
         </nav>
-        <div id="language-selector">
-            <select id="language">
-                <option value="en">English</option>
-                <option value="es">Español</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="zh">中文</option>
-                <option value="ar">العربية</option>
-            </select>
-        </div>
     </header>
 
-    <main>
-        <section id="mars-terrain">
-            <h1><%= t('marsVisualization') %></h1>
-            <div id="scene-container"></div>
+    <main class="container mx-auto mt-8">
+        <section id="mars-terrain" class="mb-8">
+            <h1 class="text-3xl font-bold mb-4"><%= t('marsVisualization') %></h1>
+            <div id="scene-container" class="w-full h-96 bg-black rounded"></div>
         </section>
 
-        <section id="weather-simulation">
-            <h2><%= t('weatherSimulation') %></h2>
-            <div id="weather-display"></div>
+        <section id="weather-simulation" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4"><%= t('weatherSimulation') %></h2>
+            <div id="weather-display" class="bg-white p-4 rounded shadow"></div>
         </section>
 
-        <section id="mars-facts">
-            <h2><%= t('marsFacts') %></h2>
-            <ul id="facts-list"></ul>
+        <section id="mars-facts" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4"><%= t('marsFacts') %></h2>
+            <ul id="facts-list" class="list-disc list-inside"></ul>
         </section>
 
-        <section id="data-visualization">
-            <h2><%= t('dataVisualization') %></h2>
-            <div id="chart-container"></div>
+        <section id="data-visualization" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4"><%= t('dataVisualization') %></h2>
+            <div id="chart-container" class="bg-white p-4 rounded shadow"></div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Mars Project Modernization</p>
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Mars Project Modernization</p>
+        </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>

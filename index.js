@@ -155,6 +155,11 @@ app.get('/api/facts', (req, res) => {
   res.json(facts);
 });
 
+app.get('/api/weather', (req, res) => {
+  const weather = generateWeather();
+  res.json(weather);
+});
+
 function generateTerrain() {
   const size = 128;
   const terrain = new Float32Array(size * size);
@@ -166,6 +171,14 @@ function generateTerrain() {
     }
   }
   return terrain;
+}
+
+function generateWeather() {
+  return {
+    temperature: Math.round((Math.random() * 60 - 30) * 10) / 10,
+    pressure: Math.round((Math.random() * 10 + 5) * 100) / 100,
+    windSpeed: Math.round(Math.random() * 100) / 10,
+  };
 }
 
 io.on('connection', (socket) => {

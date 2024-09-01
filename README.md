@@ -87,13 +87,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Optimize assets using compression and caching strategies
 -   Implement progressive loading for 3D models and textures
 
-## Security Considerations
-
--   Implement OAuth 2.0 for secure authentication
--   Use HTTPS for all communications
--   Implement rate limiting to prevent abuse
--   Regularly update dependencies to patch vulnerabilities
--   Conduct security audits and penetration testing
 
 ## Contributing
 

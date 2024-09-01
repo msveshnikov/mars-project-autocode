@@ -4,8 +4,24 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GUI } from 'dat.gui';
 import { createStore } from 'redux';
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import Chart from 'chart.js/auto';
 
 const store = createStore(rootReducer);
+
+i18next.use(initReactI18next).init({
+  resources: {
+    en: { translation: require('../locales/en.json') },
+    es: { translation: require('../locales/es.json') },
+    fr: { translation: require('../locales/fr.json') },
+    de: { translation: require('../locales/de.json') },
+    zh: { translation: require('../locales/zh.json') },
+    ar: { translation: require('../locales/ar.json') },
+  },
+  lng: 'en',
+  fallbackLng: 'en',
+});
 
 class MarsApp {
   constructor() {
@@ -169,11 +185,13 @@ function initializeApp() {
   const languageSelector = document.getElementById('language');
   languageSelector.addEventListener('change', (event) => {
     store.dispatch({ type: 'SET_LANGUAGE', payload: event.target.value });
+    i18next.changeLanguage(event.target.value);
     updateUILanguage(event.target.value);
   });
 
   fetchWeatherData();
   fetchMarsFacts();
+  initializeDataVisualization();
 }
 
 async function fetchWeatherData() {
@@ -189,9 +207,9 @@ async function fetchWeatherData() {
 function updateWeatherDisplay(weatherData) {
   const weatherDisplay = document.getElementById('weather-display');
   weatherDisplay.innerHTML = `
-    <p>Temperature: ${weatherData.temperature}°C</p>
-    <p>Pressure: ${weatherData.pressure} hPa</p>
-    <p>Wind Speed: ${weatherData.windSpeed} m/s</p>
+    <p>${i18next.t('temperature')}: ${weatherData.temperature}°C</p>
+    <p>${i18next.t('pressure')}: ${weatherData.pressure} hPa</p>
+    <p>${i18next.t('windSpeed')}: ${weatherData.windSpeed} m/s</p>
   `;
 }
 
@@ -221,6 +239,39 @@ function updateUILanguage(language) {
   elements.forEach((element) => {
     const key = element.getAttribute('data-i18n');
     element.textContent = i18next.t(key);
+  });
+}
+
+function initializeDataVisualization() {
+  const ctx = document.getElementById('chart-container').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [i18next.t('temperature'), i18next.t('pressure'), i18next.t('windSpeed')],
+      datasets: [{
+        label: i18next.t('marsWeatherData'),
+        data: [20, 6.1, 7.2],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      },
+      responsive: true
+    }
   });
 }
 
