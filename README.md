@@ -22,7 +22,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   User accounts and personalized experiences
 -   Server-side rendering with EJS templates
 -   Progressive Web App (PWA) capabilities
--   Accessibility features for inclusive user experience
 -   Data visualization tools for Mars statistics
 
 ## Technology Stack
@@ -32,9 +31,8 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   3D Rendering: Three.js
 -   Templating: EJS
 -   Linting: ESLint with custom configuration
--   State Management: Redux
 -   CSS Framework: Tailwind CSS
--   Testing: Jest and React Testing Library
+
 
 ## Getting Started
 
@@ -46,23 +44,15 @@ This project modernizes and resurrects the Mars application using contemporary t
 
 -   Use ESLint for code linting with custom rules
 -   Follow Airbnb JavaScript Style Guide
--   Implement unit tests using Jest
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
--   Use Storybook for component development and documentation
 
 ## Deployment
 
 -   Containerize the application using Docker
 -   Deploy to cloud platforms (AWS, Google Cloud, or Azure)
 -   Implement CI/CD pipeline using GitHub Actions
--   Use Terraform for infrastructure as code
 
-## Multi-language Support
-
--   Support multiple languages including English, Spanish, French, and Mandarin
--   Allow users to switch languages seamlessly
--   Ensure all UI elements and content are localized
 
 ## Future Enhancements
 
@@ -78,12 +68,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Social sharing features for discoveries and experiences
 -   Integration with educational platforms for classroom use
 
-## Performance Optimization
-
--   Implement code splitting and lazy loading
--   Use server-side rendering for initial page load
--   Optimize assets using compression and caching strategies
--   Implement progressive loading for 3D models and textures
 
 
 ## Contributing
@@ -100,9 +84,9 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
 
-
 # TODO
 
 -   get rid of i18n and multilanguage EVERYWHERE!!!
-
+-   make default page with Mars terrain 3D view
+-   make Mars terrain auto move with OpenGL shifting camera
 

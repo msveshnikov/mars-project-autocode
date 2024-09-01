@@ -12,7 +12,6 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -96,13 +95,10 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "landing.html"));
+    res.render("main", { user: req.user });
 });
 
 app.get("/explore", (req, res) => {
-    if (!req.isAuthenticated()) {
-        return res.redirect("/");
-    }
     res.render("main", { user: req.user });
 });
 
