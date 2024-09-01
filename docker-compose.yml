@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
     app:
@@ -19,6 +19,26 @@ services:
             - ./src:/app/src
             - ./package.json:/app/package.json
             - ./package-lock.json:/app/package-lock.json
+        networks:
+            - app-network
+
+    prometheus:
+        image: prom/prometheus
+        volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+        ports:
+            - "9090:9090"
+        networks:
+            - app-network
+
+    grafana:
+        image: grafana/grafana
+        volumes:
+            - ./grafana-dashboard.json:/etc/grafana/provisioning/dashboards/mars-dashboard.json
+        ports:
+            - "3001:3000"
+        depends_on:
+            - prometheus
         networks:
             - app-network
 

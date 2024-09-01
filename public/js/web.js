@@ -314,11 +314,11 @@ function initializeDataVisualization() {
             ],
         },
         options: {
-            scales: {
-                y: {
-                    beginAtZero: true,
-                },
-            },
+            // scales: {
+            //     y: {
+            //         beginAtZero: true,
+            //     },
+            // },
             responsive: true,
         },
     });

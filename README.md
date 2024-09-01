@@ -19,12 +19,9 @@ This project modernizes and resurrects the Mars application using contemporary t
 
 -   Interactive 3D Mars terrain visualization
 -   Real-time weather simulation
--   Multi-language support with dynamic content localization
 -   Responsive design for various devices
 -   Server-side rendering with EJS templates
--   Progressive Web App (PWA) capabilities
 -   Data visualization tools for Mars statistics
--   Offline mode support
 -   Dynamic theming based on Mars time of day
 
 ## Technology Stack
@@ -35,7 +32,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Templating: EJS
 -   Linting: ESLint with custom configuration
 -   CSS Framework: Tailwind CSS
--   PWA: Service Workers and Web App Manifest
 
 ## Getting Started
 
@@ -48,7 +44,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Use ESLint for code linting with custom rules
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
--   Implement lazy loading for performance optimization
 
 ## Deployment
 
@@ -82,5 +77,4 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 # TODO
 
--   Fix TypeError: Cannot read properties of undefined (reading 'map')
-    at createTemperatureMap (weather:67:40)
+-   fix Error: "bar" is not a registered controller.
