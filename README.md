@@ -82,5 +82,5 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 # TODO
 
--   Fix core.registry.js:178 Uncaught Error: "linear" is not a registered scale.
--   Fix chart.js:19 Uncaught (in promise) Error: "heatmap" is not a registered controller.
+-   Fix TypeError: Cannot read properties of undefined (reading 'map')
+    at createTemperatureMap (weather:67:40)

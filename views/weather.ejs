@@ -10,7 +10,7 @@
         <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
     </head>
-    <body class="bg-gray-100">
+    <body class="bg-gray-100 transition-colors duration-300">
         <header class="bg-red-800 text-white p-4">
             <nav class="container mx-auto flex justify-between items-center">
                 <ul class="flex space-x-4">
@@ -65,14 +65,14 @@
                         datasets: [
                             {
                                 label: "Temperature",
-                                data: data.map((d, i) => ({ x: i % 10, y: Math.floor(i / 10), v: d })),
+                                data: data.map((d, i) => ({ x: i % 8, y: Math.floor(i / 8), v: d })),
                                 backgroundColor: (context) => {
                                     const value = context.dataset.data[context.dataIndex].v;
-                                    const alpha = (value + 20) / 70;
+                                    const alpha = (value + 30) / 90;
                                     return `rgba(255, 0, 0, ${alpha})`;
                                 },
-                                width: ({ chart }) => (chart.chartArea || {}).width / 10 - 1,
-                                height: ({ chart }) => (chart.chartArea || {}).height / 10 - 1,
+                                width: ({ chart }) => (chart.chartArea || {}).width / 8 - 1,
+                                height: ({ chart }) => (chart.chartArea || {}).height / 8 - 1,
                             },
                         ],
                     },
@@ -83,8 +83,8 @@
                             title: { display: true, text: "Mars Temperature Map" },
                         },
                         scales: {
-                            x: { type: "linear", position: "bottom", min: 0, max: 9 },
-                            y: { type: "linear", min: 0, max: 9 },
+                            x: { type: "linear", position: "bottom", min: 0, max: 7 },
+                            y: { type: "linear", min: 0, max: 7 },
                         },
                     },
                 });
@@ -99,8 +99,8 @@
                             {
                                 label: "Wind",
                                 data: data.map((d, i) => ({
-                                    x: i % 10,
-                                    y: Math.floor(i / 10),
+                                    x: i % 8,
+                                    y: Math.floor(i / 8),
                                     rotation: d.direction,
                                     speed: d.speed,
                                 })),
@@ -122,32 +122,47 @@
                             title: { display: true, text: "Mars Wind Map" },
                         },
                         scales: {
-                            x: { type: "linear", position: "bottom", min: 0, max: 9 },
-                            y: { type: "linear", min: 0, max: 9 },
+                            x: { type: "linear", position: "bottom", min: 0, max: 7 },
+                            y: { type: "linear", min: 0, max: 7 },
                         },
                     },
                 });
             }
 
-            fetch("/api/weather")
-                .then((response) => response.json())
-                .then((data) => {
-                    updateWeatherData(data);
-                    createTemperatureMap(data.temperatureMap);
-                    createWindMap(data.windMap);
-                });
+            function setupDynamicTheming() {
+                const hour = new Date().getHours();
+                const isDaytime = hour >= 6 && hour < 18;
+                document.body.classList.toggle("bg-gray-900", !isDaytime);
+                document.body.classList.toggle("text-white", !isDaytime);
+            }
+
+            function fetchWeatherData() {
+                fetch("/api/weather-map")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        createTemperatureMap(data.temperatureMap);
+                        createWindMap(data.windMap.map((value, index) => ({
+                            speed: data.windMap[index * 2],
+                            direction: data.windMap[index * 2 + 1]
+                        })));
+                    })
+                    .catch((error) => console.error("Error fetching weather map data:", error));
+
+                fetch("/api/weather")
+                    .then((response) => response.json())
+                    .then((data) => {
+                        updateWeatherData(data);
+                    })
+                    .catch((error) => console.error("Error fetching weather data:", error));
+            }
 
             socket.on("weatherUpdate", (data) => {
                 updateWeatherData(data);
             });
 
-            function setupDynamicTheming() {
-                const hour = new Date().getHours();
-                const isDaytime = hour >= 6 && hour < 18;
-                document.body.classList.toggle("night-mode", !isDaytime);
-            }
-
             setupDynamicTheming();
+            fetchWeatherData();
+            setInterval(fetchWeatherData, 60000);
         </script>
     </body>
 </html>

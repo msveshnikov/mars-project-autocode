@@ -106,6 +106,8 @@ function generateWeather() {
         temperature: Math.round((Math.random() * 60 - 30) * 10) / 10,
         pressure: Math.round((Math.random() * 10 + 5) * 100) / 100,
         windSpeed: Math.round(Math.random() * 100) / 10,
+        temperatureMap: generateTemperatureMap(),
+        windMap: generateWindMap(),
     };
 }
 
@@ -123,20 +125,31 @@ function generateStatistics() {
 }
 
 function generateWeatherMap() {
-    const size = 64;
-    const temperatureMap = new Float32Array(size * size);
-    const windMap = new Float32Array(size * size * 2);
+    return {
+        temperatureMap: generateTemperatureMap(),
+        windMap: generateWindMap(),
+    };
+}
 
-    for (let i = 0; i < size; i++) {
-        for (let j = 0; j < size; j++) {
-            const index = i * size + j;
-            temperatureMap[index] = Math.round((Math.random() * 60 - 30) * 10) / 10;
-            windMap[index * 2] = Math.round(Math.random() * 100) / 10;
-            windMap[index * 2 + 1] = Math.round(Math.random() * 360);
-        }
+function generateTemperatureMap() {
+    const size = 10;
+    const temperatureMap = new Array(size * size);
+    for (let i = 0; i < size * size; i++) {
+        temperatureMap[i] = Math.round((Math.random() * 60 - 30) * 10) / 10;
     }
+    return temperatureMap;
+}
 
-    return { temperatureMap, windMap };
+function generateWindMap() {
+    const size = 10;
+    const windMap = new Array(size * size);
+    for (let i = 0; i < size * size; i++) {
+        windMap[i] = {
+            speed: Math.round(Math.random() * 100) / 10,
+            direction: Math.round(Math.random() * 360),
+        };
+    }
+    return windMap;
 }
 
 io.on("connection", (socket) => {
@@ -144,6 +157,10 @@ io.on("connection", (socket) => {
     socket.on("disconnect", () => {
         console.log("User disconnected");
     });
+
+    setInterval(() => {
+        socket.emit("weatherUpdate", generateWeather());
+    }, 60000);
 });
 
 if (process.env.NODE_ENV === "production") {
