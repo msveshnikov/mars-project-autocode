@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="<%= i18n.language %>">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= t('pageTitle') %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#FF0000">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/"><%= t('home') %></a></li>
+                <li><a href="/explore"><%= t('explore') %></a></li>
+                <li><a href="/weather"><%= t('weather') %></a></li>
+                <li><a href="/account"><%= t('account') %></a></li>
+            </ul>
+        </nav>
+        <div id="language-selector">
+            <select id="language">
+                <option value="en">English</option>
+                <option value="es">Español</option>
+                <option value="fr">Français</option>
+                <option value="de">Deutsch</option>
+                <option value="zh">中文</option>
+                <option value="ar">العربية</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <section id="mars-terrain">
+            <h1><%= t('marsVisualization') %></h1>
+            <div id="scene-container"></div>
+        </section>
+
+        <section id="weather-simulation">
+            <h2><%= t('weatherSimulation') %></h2>
+            <div id="weather-display"></div>
+        </section>
+
+        <section id="mars-facts">
+            <h2><%= t('marsFacts') %></h2>
+            <ul id="facts-list"></ul>
+        </section>
+
+        <section id="data-visualization">
+            <h2><%= t('dataVisualization') %></h2>
+            <div id="chart-container"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Mars Project Modernization</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+    <script src="/js/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/web.js" type="module"></script>
+    <script>
+        document.getElementById("language").addEventListener("change", function() {
+            window.location = `/?lng=${this.value}`;
+        });
+
+        fetch("/api/facts")
+            .then(response => response.json())
+            .then(facts => {
+                const factsList = document.getElementById("facts-list");
+                facts.forEach(fact => {
+                    const li = document.createElement("li");
+                    li.textContent = fact.content;
+                    factsList.appendChild(li);
+                });
+            });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+
+        function createDataVisualization() {
+            const ctx = document.createElement('canvas');
+            document.getElementById('chart-container').appendChild(ctx);
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Temperature', 'Pressure', 'Wind Speed'],
+                    datasets: [{
+                        label: '<%= t("marsWeatherData") %>',
+                        data: [20, 6.1, 7.2],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    responsive: true
+                }
+            });
+        }
+
+        createDataVisualization();
+    </script>
+</body>
+</html>
