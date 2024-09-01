@@ -1,12 +1,14 @@
 import globals from "globals";
 import pluginJs from "@eslint/js";
 
+const { browser, node } = globals;
+
 export default [
     {
         languageOptions: {
             globals: {
-                ...globals.browser,
-                ...globals.node,
+                ...browser,
+                ...node,
             },
         },
     },

@@ -141,7 +141,7 @@ function generateTemperatureMap() {
 }
 
 function generateWindMap() {
-    const size = 10;
+    const size = 20;
     const windMap = new Array(size * size);
     for (let i = 0; i < size * size; i++) {
         windMap[i] = {
