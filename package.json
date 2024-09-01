@@ -1,0 +1,31 @@
+{
+    "name": "mars-project-modernization",
+    "version": "1.0.0",
+    "description": "Web-based Mars terrain visualization application",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon app.js",
+        "lint": "eslint .",
+        "format": "prettier --write ."
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "three": "^0.137.0",
+        "dat.gui": "^0.7.7",
+        "express-session": "^1.17.2"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15",
+        "eslint": "^8.7.0"
+    },
+    "engines": {
+        "node": ">=14.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/mars-project-modernization.git"
+    },
+    "author": "Your Name",
+    "license": "MIT"
+}

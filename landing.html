@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Project Modernization</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        header { background: #f4f4f4; padding: 1rem 0; }
+        nav ul { list-style: none; display: flex; justify-content: space-around; }
+        nav ul li a { text-decoration: none; color: #333; }
+        .hero { background: url('https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover; height: 100vh; display: flex; align-items: center; text-align: center; color: #fff; }
+        .hero-content { background: rgba(0,0,0,0.7); padding: 2rem; border-radius: 10px; }
+        .btn { display: inline-block; background: #ff4500; color: #fff; padding: 0.8rem 1.5rem; text-decoration: none; border-radius: 5px; margin-top: 1rem; }
+        .features { padding: 3rem 0; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .feature-item { background: #f4f4f4; padding: 1.5rem; border-radius: 5px; text-align: center; }
+        .pricing { background: #f4f4f4; padding: 3rem 0; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .pricing-item { background: #fff; padding: 2rem; border-radius: 5px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        footer { background: #333; color: #fff; text-align: center; padding: 1rem 0; }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Mars Project Modernization</h1>
+            <p>Reviving the Mars application with cutting-edge technologies</p>
+            <a href="#" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <h3>Modular Architecture</h3>
+                    <p>Implementing MVC or MVVM design patterns</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Modern UI</h3>
+                    <p>Redesigned interface with responsive design</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Advanced Graphics</h3>
+                    <p>Upgraded OpenGL implementation with shader-based rendering</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Cross-platform Support</h3>
+                    <p>Run on Windows, macOS, and Linux</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2>Pricing Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-item">
+                    <h3>Basic</h3>
+                    <p>$9.99/month</p>
+                    <ul>
+                        <li>Core Features</li>
+                        <li>Basic Support</li>
+                        <li>1 User</li>
+                    </ul>
+                    <a href="#" class="btn">Choose Plan</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Pro</h3>
+                    <p>$19.99/month</p>
+                    <ul>
+                        <li>All Basic Features</li>
+                        <li>Advanced Graphics</li>
+                        <li>Priority Support</li>
+                        <li>5 Users</li>
+                    </ul>
+                    <a href="#" class="btn">Choose Plan</a>
+                </div>
+                <div class="pricing-item">
+                    <h3>Enterprise</h3>
+                    <p>Contact Us</p>
+                    <ul>
+                        <li>All Pro Features</li>
+                        <li>Custom Development</li>
+                        <li>24/7 Support</li>
+                        <li>Unlimited Users</li>
+                    </ul>
+                    <a href="#" class="btn">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Mars Project Modernization. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
