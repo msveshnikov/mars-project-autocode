@@ -60,11 +60,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Integration with NASA APIs for real-time Mars data
 -   Mobile app development (iOS and Android) using React Native
 -   Machine learning for terrain analysis and prediction
--   Offline mode support with service workers
--   WebGL performance optimizations for low-end devices
--   Voice commands and natural language processing
--   Social sharing features for discoveries and experiences
--   Integration with educational platforms for classroom use
 
 ## Contributing
 
@@ -79,3 +74,7 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
+
+# TODO
+
+-   get rid of mongo, passport and uiser accounts
