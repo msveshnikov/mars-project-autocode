@@ -86,24 +86,6 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 # TODO
 
--   get rid of i18n and multilanguage EVERYWHERE!!!
--   make default page with Mars terrain 3D view
--   make Mars terrain auto move with OpenGL shifting camera
-
-# FIX
-
-localhost/:1 Refused to load the script 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js' because it violates the following Content Security Policy directive: "script-src 'self'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
-
-localhost/:73 
- GET http://localhost:3000/js/OrbitControls.js net::ERR_ABORTED 404 (Not Found)
-localhost/:1 Refused to load the script 'https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js' because it violates the following Content Security Policy directive: "script-src 'self'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
-localhost/:1 Refused to execute script from 'http://localhost:3000/js/OrbitControls.js' because its MIME type ('text/html') is not executable, and strict MIME type checking is enabled.
-localhost/:1 Refused to load the script 'https://cdn.jsdelivr.net/npm/chart.js' because it violates the following Content Security Policy directive: "script-src 'self'". Note that 'script-src-elem' was not explicitly set, so 'script-src' is used as a fallback.
-localhost/:76 Refused to execute inline script because it violates the following Content Security Policy directive: "script-src 'self'". Either the 'unsafe-inline' keyword, a hash ('sha256-4Jv0gnahDHDDWMGfgK9DDb27x9DYFY/fn6c4QpSxepA='), or a nonce ('nonce-...') is required to enable inline execution.
-localhost/:1 Uncaught TypeError: Failed to resolve module specifier "three". Relative references must start with either "/", "./", or "../".
-manifest.json:1 
- GET http://localhost:3000/manifest.json 404 (Not Found)
-manifest.json:1 Manifest: Line: 1, column: 1, Syntax error.
-﻿
-
-
+-   fix  all those references import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
+ import { GUI } from "dat.gui";
+ import Chart from "chart.js/auto";
