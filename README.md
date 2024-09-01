@@ -8,21 +8,28 @@ This project modernizes and resurrects the Mars application using contemporary t
 
 -   `public/js/web.js`: Main application logic (for Browser)
 -   `public/css/styles.css`: Custom styles for the application
--   `public/manifest.json`: Web App Manifest for PWA support
+-   `public/images/hero.avif`: Hero image for landing page
 -   `index.js`: Entry point for the Express server
--   `landing.html`: Static landing page
--   `package.json`: Project dependencies and scripts
--   `views/main.ejs`: Main EJS template for dynamic content
+-   `views/*.ejs`: EJS templates for dynamic content
 -   `eslint.config.mjs`: ESLint configuration for code quality
+-   `Dockerfile`: Container configuration for deployment
+-   `docker-compose.yml`: Multi-container Docker setup
+-   `ci-cd.yml`: CI/CD pipeline configuration
+-   `prometheus.yml`: Prometheus configuration for monitoring
+-   `grafana-dashboard.json`: Grafana dashboard for visualizing metrics
 
 ## Features
 
 -   Interactive 3D Mars terrain visualization
--   Real-time weather simulation
+-   Real-time weather simulation with dedicated weather view
 -   Responsive design for various devices
 -   Server-side rendering with EJS templates
 -   Data visualization tools for Mars statistics
 -   Dynamic theming based on Mars time of day
+-   Multi-language support for global accessibility
+-   Containerized deployment with Docker
+-   Automated CI/CD pipeline
+-   Prometheus and Grafana integration for monitoring and analytics
 
 ## Technology Stack
 
@@ -32,6 +39,9 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Templating: EJS
 -   Linting: ESLint with custom configuration
 -   CSS Framework: Tailwind CSS
+-   Containerization: Docker
+-   CI/CD: GitHub Actions
+-   Monitoring: Prometheus and Grafana
 
 ## Getting Started
 
@@ -47,10 +57,9 @@ This project modernizes and resurrects the Mars application using contemporary t
 
 ## Deployment
 
--   Containerize the application using Docker
--   Deploy to cloud platforms (AWS, Google Cloud, or Azure)
--   Implement CI/CD pipeline using GitHub Actions
--   Use CDN for static asset delivery
+-   Build and run Docker containers: `docker-compose up --build`
+-   CI/CD pipeline automatically deploys to staging and production environments
+-   Monitor application performance using Prometheus and Grafana
 
 ## Future Enhancements
 
@@ -60,6 +69,8 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Integration with NASA APIs for real-time Mars data
 -   WebGL-based terrain generation for custom Mars landscapes
 -   Voice commands and natural language processing for navigation
+-   Machine learning models for predictive Mars weather forecasting
+-   Integration with satellite imagery APIs for real-time surface updates
 
 ## Contributing
 
@@ -74,7 +85,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
-
-# TODO
-
--   add nice hero image to landing (/public/images/hero.avif)
