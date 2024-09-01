@@ -68,8 +68,10 @@
                                 data: data.map((d, i) => ({ x: i % 8, y: Math.floor(i / 8), v: d })),
                                 backgroundColor: (context) => {
                                     const value = context.dataset.data[context.dataIndex].v;
-                                    const alpha = (value + 30) / 90;
-                                    return `rgba(255, 0, 0, ${alpha})`;
+                                    const normalizedValue = (value + 30) / 60;
+                                    const red = Math.round(255 * normalizedValue);
+                                    const green = Math.round(255 * (1 - normalizedValue));
+                                    return `rgb(${red}, ${green}, 0)`;
                                 },
                                 width: ({ chart }) => (chart.chartArea || {}).width / 8 - 1,
                                 height: ({ chart }) => (chart.chartArea || {}).height / 8 - 1,
@@ -108,8 +110,10 @@
                                 rotation: (context) => context.raw.rotation,
                                 backgroundColor: (context) => {
                                     const speed = context.raw.speed;
-                                    const alpha = speed / 10;
-                                    return `rgba(0, 0, 255, ${alpha})`;
+                                    const normalizedSpeed = speed / 10;
+                                    const red = Math.round(255 * normalizedSpeed);
+                                    const green = Math.round(255 * (1 - normalizedSpeed));
+                                    return `rgb(${red}, ${green}, 0)`;
                                 },
                                 pointRadius: 5,
                             },

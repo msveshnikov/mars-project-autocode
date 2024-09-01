@@ -9,7 +9,6 @@
         "dev": "nodemon index.js",
         "lint": "eslint .",
         "format": "prettier --write .",
-        "test": "jest",
         "build": "webpack --mode production"
     },
     "dependencies": {
@@ -18,12 +17,9 @@
         "ejs": "^3.1.10",
         "express": "^4.19.2",
         "express-rate-limit": "^7.2.0",
-        "express-session": "^1.18.0",
         "helmet": "^7.1.0",
         "morgan": "^1.10.0",
-        "socket.io": "^4.7.5",
-        "three": "^0.149.0",
-        "chart.js": "^4.2.1"
+        "socket.io": "^4.7.5"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.1",
@@ -31,8 +27,7 @@
         "eslint-config-airbnb-base": "^15.0.0",
         "eslint-config-prettier": "^9.1.0",
         "globals": "^15.9.0",
-        "nodemon": "^3.1.4",
-        "prettier": "^3.2.5"
+        "nodemon": "^3.1.4"
     },
     "engines": {
         "node": ">=14.0.0"
