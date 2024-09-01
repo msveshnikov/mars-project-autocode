@@ -1,8 +1,12 @@
-# Mars Project Modernization
+# Mars Project Modernization  (build by [AutoCode](https://autocode.work) in 20 minutes)
 
 ## Overview
 
 This project modernizes and resurrects the Mars application using contemporary technologies and best practices, offering an immersive and interactive experience for exploring the Red Planet.
+
+# DEMO
+
+https://mars-project-autocode.onrender.com/
 
 ## Project Structure
 
@@ -66,7 +70,6 @@ This project modernizes and resurrects the Mars application using contemporary t
     Monitor application performance using Prometheus and Grafana
 -   Use environment variables for configuration management
 
-
 ## Future Enhancements
 
 -   Virtual Reality (VR) support using WebXR
@@ -100,4 +103,4 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 -   get rid of any i18n or multilanguage
 -   get rid of PWA fully
--   make Data Visualizations small (on  main page)
+-   make Data Visualizations small (on main page)
