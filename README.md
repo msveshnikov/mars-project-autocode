@@ -49,7 +49,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Implement unit tests using Jest
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
--   Implement i18n for multi-language support
 -   Use Storybook for component development and documentation
 
 ## Deployment
@@ -61,7 +60,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 
 ## Multi-language Support
 
--   Implement dynamic content localization using i18n
 -   Support multiple languages including English, Spanish, French, and Mandarin
 -   Allow users to switch languages seamlessly
 -   Ensure all UI elements and content are localized
@@ -101,3 +99,10 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
+
+
+# TODO
+
+-   get rid of i18n and multilanguage EVERYWHERE!!!
+
+

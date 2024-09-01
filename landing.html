@@ -1,178 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Mars Project Modernization</title>
-        <style>
-            * {
-                box-sizing: border-box;
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-            }
-            .container {
-                max-width: 1200px;
-                margin: 0 auto;
-                padding: 0 20px;
-            }
-            header {
-                background: #f4f4f4;
-                padding: 1rem 0;
-            }
-            nav ul {
-                list-style: none;
-                display: flex;
-                justify-content: space-around;
-            }
-            nav ul li a {
-                text-decoration: none;
-                color: #333;
-            }
-            .hero {
-                background: url("https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80")
-                    no-repeat center center/cover;
-                height: 100vh;
-                display: flex;
-                align-items: center;
-                text-align: center;
-                color: #fff;
-            }
-            .hero-content {
-                background: rgba(0, 0, 0, 0.7);
-                padding: 2rem;
-                border-radius: 10px;
-            }
-            .btn {
-                display: inline-block;
-                background: #ff4500;
-                color: #fff;
-                padding: 0.8rem 1.5rem;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 1rem;
-            }
-            .features {
-                padding: 3rem 0;
-            }
-            .feature-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                gap: 2rem;
-            }
-            .feature-item {
-                background: #f4f4f4;
-                padding: 1.5rem;
-                border-radius: 5px;
-                text-align: center;
-            }
-            .tech-stack {
-                background: #e0e0e0;
-                padding: 3rem 0;
-            }
-            .tech-list {
-                display: flex;
-                justify-content: space-around;
-                flex-wrap: wrap;
-            }
-            .tech-item {
-                background: #fff;
-                padding: 1rem;
-                border-radius: 5px;
-                margin: 0.5rem;
-                text-align: center;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            }
-            footer {
-                background: #333;
-                color: #fff;
-                text-align: center;
-                padding: 1rem 0;
-            }
-        </style>
-    </head>
-    <body>
-        <header>
-            <nav class="container">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#tech-stack">Tech Stack</a></li>
-                    <li><a href="#get-started">Get Started</a></li>
-                </ul>
-            </nav>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Project Modernization</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#FF4500">
+</head>
+<body class="bg-gray-100">
+    <header class="bg-red-800 text-white p-4">
+        <nav class="container mx-auto flex justify-between items-center">
+            <ul class="flex space-x-4">
+                <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+                <li><a href="#features" class="hover:text-gray-300">Features</a></li>
+                <li><a href="#tech-stack" class="hover:text-gray-300">Tech Stack</a></li>
+                <li><a href="#get-started" class="hover:text-gray-300">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <h1>Mars Project Modernization</h1>
-                <p>Explore Mars with cutting-edge technology</p>
-                <a href="#get-started" class="btn">Get Started</a>
+    <main class="container mx-auto mt-8">
+        <section id="home" class="mb-16">
+            <div class="bg-red-700 text-white p-16 rounded-lg shadow-lg">
+                <h1 class="text-4xl font-bold mb-4">Mars Project Modernization</h1>
+                <p class="text-xl mb-8">Explore Mars with cutting-edge technology</p>
+                <a href="#get-started" class="bg-white text-red-700 py-2 px-4 rounded hover:bg-gray-200 transition duration-300">Get Started</a>
             </div>
         </section>
 
-        <section id="features" class="features">
-            <div class="container">
-                <h2>Key Features</h2>
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h3>Interactive 3D Mars Terrain</h3>
-                        <p>Explore Mars surface in high-detail 3D</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Real-time Weather Simulation</h3>
-                        <p>Experience dynamic Martian weather patterns</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Multi-language Support</h3>
-                        <p>Access the app in multiple languages</p>
-                    </div>
-                    <div class="feature-item">
-                        <h3>Responsive Design</h3>
-                        <p>Seamless experience across all devices</p>
-                    </div>
+        <section id="features" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Interactive 3D Mars Terrain</h3>
+                    <p>Explore Mars surface in high-detail 3D</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Real-time Weather Simulation</h3>
+                    <p>Experience dynamic Martian weather patterns</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Responsive Design</h3>
+                    <p>Seamless experience across all devices</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-xl font-semibold mb-4">Data Visualization</h3>
+                    <p>Visualize Mars statistics and data</p>
                 </div>
             </div>
         </section>
 
-        <section id="tech-stack" class="tech-stack">
-            <div class="container">
-                <h2>Technology Stack</h2>
-                <div class="tech-list">
-                    <div class="tech-item">HTML5</div>
-                    <div class="tech-item">CSS3</div>
-                    <div class="tech-item">JavaScript (ES6+)</div>
-                    <div class="tech-item">Node.js</div>
-                    <div class="tech-item">Express.js</div>
-                    <div class="tech-item">Three.js</div>
-                    <div class="tech-item">i18next</div>
-                    <div class="tech-item">JWT</div>
-                    <div class="tech-item">MongoDB</div>
-                </div>
+        <section id="tech-stack" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Technology Stack</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">HTML5</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">CSS3</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">JavaScript (ES6+)</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Node.js</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Express.js</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Three.js</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">EJS</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Redux</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Tailwind CSS</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">Jest</div>
+                <div class="bg-white p-4 rounded-lg shadow-md text-center">ESLint</div>
             </div>
         </section>
 
-        <section id="get-started" class="features">
-            <div class="container">
-                <h2>Get Started</h2>
-                <p>Follow these steps to start exploring Mars:</p>
-                <ol>
-                    <li>Clone the repository</li>
-                    <li>Install dependencies: <code>npm install</code></li>
-                    <li>Start the development server: <code>npm run dev</code></li>
+        <section id="get-started" class="mb-16">
+            <h2 class="text-3xl font-bold mb-8">Get Started</h2>
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <ol class="list-decimal list-inside mb-8">
+                    <li class="mb-2">Clone the repository</li>
+                    <li class="mb-2">Install dependencies: <code class="bg-gray-200 px-2 py-1 rounded">npm install</code></li>
+                    <li class="mb-2">Start the development server: <code class="bg-gray-200 px-2 py-1 rounded">npm run dev</code></li>
                 </ol>
-                <a href="https://github.com/msveshnikov/mars-project" class="btn">View on GitHub</a>
+                <a href="https://github.com/msveshnikov/mars-project" class="bg-red-700 text-white py-2 px-4 rounded hover:bg-red-600 transition duration-300">View on GitHub</a>
             </div>
         </section>
+    </main>
 
-        <footer>
-            <div class="container">
-                <p>&copy; 2023 Mars Project Modernization. All rights reserved.</p>
-            </div>
-        </footer>
-    </body>
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Mars Project Modernization. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="/js/web.js" type="module"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch(error => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        }
+    </script>
+</body>
 </html>

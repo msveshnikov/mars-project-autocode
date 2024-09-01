@@ -1,55 +1,69 @@
 <!DOCTYPE html>
-<html lang="<%= i18n.language %>">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= t('pageTitle') %></title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#FF0000">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mars Project Modernization</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#FF4500" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 <body class="bg-gray-100">
     <header class="bg-red-800 text-white p-4">
         <nav class="container mx-auto flex justify-between items-center">
             <ul class="flex space-x-4">
-                <li><a href="/" class="hover:text-gray-300"><%= t('home') %></a></li>
-                <li><a href="/explore" class="hover:text-gray-300"><%= t('explore') %></a></li>
-                <li><a href="/weather" class="hover:text-gray-300"><%= t('weather') %></a></li>
-                <li><a href="/account" class="hover:text-gray-300"><%= t('account') %></a></li>
+                <li><a href="/" class="hover:text-gray-300">Home</a></li>
+                <li><a href="/explore" class="hover:text-gray-300">Explore</a></li>
+                <li><a href="/weather" class="hover:text-gray-300">Weather</a></li>
+                <li><a href="/account" class="hover:text-gray-300">Account</a></li>
             </ul>
-            <div id="language-selector">
-                <select id="language" class="bg-red-700 text-white p-2 rounded">
-                    <option value="en">English</option>
-                    <option value="es">Español</option>
-                    <option value="fr">Français</option>
-                    <option value="de">Deutsch</option>
-                    <option value="zh">中文</option>
-                    <option value="ar">العربية</option>
-                </select>
-            </div>
         </nav>
     </header>
 
     <main class="container mx-auto mt-8">
         <section id="mars-terrain" class="mb-8">
-            <h1 class="text-3xl font-bold mb-4"><%= t('marsVisualization') %></h1>
+            <h1 class="text-3xl font-bold mb-4">Mars Visualization</h1>
             <div id="scene-container" class="w-full h-96 bg-black rounded"></div>
         </section>
 
         <section id="weather-simulation" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4"><%= t('weatherSimulation') %></h2>
+            <h2 class="text-2xl font-bold mb-4">Weather Simulation</h2>
             <div id="weather-display" class="bg-white p-4 rounded shadow"></div>
         </section>
 
         <section id="mars-facts" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4"><%= t('marsFacts') %></h2>
+            <h2 class="text-2xl font-bold mb-4">Mars Facts</h2>
             <ul id="facts-list" class="list-disc list-inside"></ul>
         </section>
 
         <section id="data-visualization" class="mb-8">
-            <h2 class="text-2xl font-bold mb-4"><%= t('dataVisualization') %></h2>
+            <h2 class="text-2xl font-bold mb-4">Data Visualization</h2>
             <div id="chart-container" class="bg-white p-4 rounded shadow"></div>
+        </section>
+
+        <section id="user-account" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4">User Account</h2>
+            <div id="account-info" class="bg-white p-4 rounded shadow">
+                <% if (user) { %>
+                <p>Welcome, <%= user.username %>!</p>
+                <a href="/logout" class="btn bg-red-800 text-white px-4 py-2 rounded">Logout</a>
+                <% } else { %>
+                <form action="/login" method="POST" class="space-y-4">
+                    <div>
+                        <label for="username" class="block">Username</label>
+                        <input type="text" id="username" name="username" required class="w-full p-2 border rounded" />
+                    </div>
+                    <div>
+                        <label for="password" class="block">Password</label>
+                        <input type="password" id="password" name="password" required class="w-full p-2 border rounded" />
+                    </div>
+                    <button type="submit" class="btn bg-red-800 text-white px-4 py-2 rounded">
+                        Login
+                    </button>
+                </form>
+                <% } %>
+            </div>
         </section>
     </main>
 
@@ -65,67 +79,16 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/web.js" type="module"></script>
     <script>
-        document.getElementById("language").addEventListener("change", function() {
-            window.location = `/?lng=${this.value}`;
-        });
-
-        fetch("/api/facts")
-            .then(response => response.json())
-            .then(facts => {
-                const factsList = document.getElementById("facts-list");
-                facts.forEach(fact => {
-                    const li = document.createElement("li");
-                    li.textContent = fact.content;
-                    factsList.appendChild(li);
-                });
-            });
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(registration => {
-                    console.log('Service Worker registered with scope:', registration.scope);
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker
+                .register("/service-worker.js")
+                .then((registration) => {
+                    console.log("Service Worker registered with scope:", registration.scope);
                 })
-                .catch(error => {
-                    console.error('Service Worker registration failed:', error);
+                .catch((error) => {
+                    console.error("Service Worker registration failed:", error);
                 });
         }
-
-        function createDataVisualization() {
-            const ctx = document.createElement('canvas');
-            document.getElementById('chart-container').appendChild(ctx);
-
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Temperature', 'Pressure', 'Wind Speed'],
-                    datasets: [{
-                        label: '<%= t("marsWeatherData") %>',
-                        data: [20, 6.1, 7.2],
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    responsive: true
-                }
-            });
-        }
-
-        createDataVisualization();
     </script>
 </body>
 </html>
