@@ -7,10 +7,10 @@
     "scripts": {
         "start": "node index.js",
         "dev": "nodemon index.js",
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "format": "prettier --write ."
     },
     "dependencies": {
-        "bcrypt": "^5.1.1",
         "compression": "^1.7.4",
         "dotenv": "^16.4.5",
         "ejs": "^3.1.10",
@@ -18,18 +18,17 @@
         "express-rate-limit": "^7.2.0",
         "express-session": "^1.18.0",
         "helmet": "^7.1.0",
-        "mongoose": "^8.6.0",
         "morgan": "^1.10.0",
-        "passport": "^0.7.0",
-        "passport-local": "^1.0.0",
         "socket.io": "^4.7.5"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.1",
         "eslint": "^8.2.8",
         "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^9.1.0",
         "globals": "^15.9.0",
-        "nodemon": "^3.1.4"
+        "nodemon": "^3.1.4",
+        "prettier": "^3.2.5"
     },
     "engines": {
         "node": ">=14.0.0"

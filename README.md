@@ -7,6 +7,8 @@ This project modernizes and resurrects the Mars application using contemporary t
 ## Project Structure
 
 -   `public/js/web.js`: Main application logic (for Browser)
+-   `public/css/styles.css`: Custom styles for the application
+-   `public/manifest.json`: Web App Manifest for PWA support
 -   `index.js`: Entry point for the Express server
 -   `landing.html`: Static landing page
 -   `package.json`: Project dependencies and scripts
@@ -19,10 +21,11 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Real-time weather simulation
 -   Multi-language support with dynamic content localization
 -   Responsive design for various devices
--   User accounts and personalized experiences
 -   Server-side rendering with EJS templates
 -   Progressive Web App (PWA) capabilities
 -   Data visualization tools for Mars statistics
+-   Offline mode support
+-   Dynamic theming based on Mars time of day
 
 ## Technology Stack
 
@@ -32,6 +35,7 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Templating: EJS
 -   Linting: ESLint with custom configuration
 -   CSS Framework: Tailwind CSS
+-   PWA: Service Workers and Web App Manifest
 
 ## Getting Started
 
@@ -45,21 +49,27 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Follow Airbnb JavaScript Style Guide
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
+-   Implement lazy loading for performance optimization
+-   Use Web Workers for computationally intensive tasks
 
 ## Deployment
 
 -   Containerize the application using Docker
 -   Deploy to cloud platforms (AWS, Google Cloud, or Azure)
 -   Implement CI/CD pipeline using GitHub Actions
+-   Use CDN for static asset delivery
+
+
+
 
 ## Future Enhancements
 
--   Virtual Reality (VR) support
+-   Virtual Reality (VR) support using WebXR
 -   Augmented Reality (AR) features for mobile devices
--   Collaborative exploration features
+-   Collaborative exploration features with WebRTC
 -   Integration with NASA APIs for real-time Mars data
--   Mobile app development (iOS and Android) using React Native
--   Machine learning for terrain analysis and prediction
+-   WebGL-based terrain generation for custom Mars landscapes
+-   Voice commands and natural language processing for navigation
 
 ## Contributing
 
@@ -74,7 +84,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
-
-# TODO
-
--   get rid of mongo, passport and uiser accounts
