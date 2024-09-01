@@ -16,7 +16,7 @@
             }
         </script>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900">
+    <body class="bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
         <header class="bg-red-800 text-white p-4 fixed top-0 left-0 right-0 z-50">
             <nav class="container mx-auto flex justify-between items-center">
                 <ul class="flex space-x-4">
@@ -24,6 +24,19 @@
                     <li><a href="/explore" class="hover:text-gray-300">Explore</a></li>
                     <li><a href="/weather" class="hover:text-gray-300">Weather</a></li>
                 </ul>
+                <div class="flex items-center">
+                    <select id="language-select" class="bg-red-700 text-white px-2 py-1 rounded mr-2">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                    </select>
+                    <button
+                        id="theme-toggle"
+                        class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Toggle Theme
+                    </button>
+                </div>
             </nav>
         </header>
 
@@ -54,20 +67,14 @@
                 <canvas id="chart-container" class="bg-white dark:bg-gray-800 p-4 rounded shadow h-64"></canvas>
             </section>
 
-            <section id="theme-switcher" class="mb-8">
-                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="themeSwitch">
-                    Theme Switch
-                </h2>
-                <button id="theme-toggle" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Toggle Theme
-                </button>
-            </section>
-
             <section id="vr-ar-features" class="mb-8">
                 <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="vrArFeatures">
                     VR/AR Features
                 </h2>
-                <button id="vr-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
+                <button
+                    id="vr-button"
+                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2"
+                >
                     Enter VR
                 </button>
                 <button id="ar-button" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
@@ -79,7 +86,10 @@
                 <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="voiceCommands">
                     Voice Commands
                 </h2>
-                <button id="start-voice" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                <button
+                    id="start-voice"
+                    class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                >
                     Start Voice Recognition
                 </button>
                 <p id="voice-output" class="mt-2"></p>
@@ -93,6 +103,105 @@
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
         <script src="/js/web.js" type="module"></script>
+        <script>
+            const socket = io();
+            const themeToggle = document.getElementById("theme-toggle");
+            const languageSelect = document.getElementById("language-select");
+            const voiceButton = document.getElementById("start-voice");
+            const voiceOutput = document.getElementById("voice-output");
+
+            themeToggle.addEventListener("click", () => {
+                document.body.classList.toggle("dark");
+            });
+
+            languageSelect.addEventListener("change", (e) => {
+                changeLanguage(e.target.value);
+            });
+
+            function changeLanguage(lang) {
+                document.querySelectorAll("[data-i18n]").forEach((el) => {
+                    const key = el.getAttribute("data-i18n");
+                    el.textContent = translations[lang][key];
+                });
+            }
+
+            const translations = {
+                en: {
+                    marsVisualization: "Mars Visualization",
+                    weatherSimulation: "Weather Simulation",
+                    marsFacts: "Mars Facts",
+                    dataVisualization: "Data Visualization",
+                    vrArFeatures: "VR/AR Features",
+                    voiceCommands: "Voice Commands",
+                },
+                es: {
+                    marsVisualization: "Visualización de Marte",
+                    weatherSimulation: "Simulación del Clima",
+                    marsFacts: "Datos sobre Marte",
+                    dataVisualization: "Visualización de Datos",
+                    vrArFeatures: "Características de RV/RA",
+                    voiceCommands: "Comandos de Voz",
+                },
+                fr: {
+                    marsVisualization: "Visualisation de Mars",
+                    weatherSimulation: "Simulation Météorologique",
+                    marsFacts: "Faits sur Mars",
+                    dataVisualization: "Visualisation des Données",
+                    vrArFeatures: "Fonctionnalités RV/RA",
+                    voiceCommands: "Commandes Vocales",
+                },
+            };
+
+            voiceButton.addEventListener("click", () => {
+                if ("webkitSpeechRecognition" in window) {
+                    const recognition = new webkitSpeechRecognition();
+                    recognition.lang = "en-US";
+                    recognition.start();
+
+                    recognition.onresult = (event) => {
+                        const transcript = event.results[0][0].transcript;
+                        voiceOutput.textContent = `You said: ${transcript}`;
+                        handleVoiceCommand(transcript);
+                    };
+                } else {
+                    voiceOutput.textContent = "Speech recognition not supported in this browser.";
+                }
+            });
+
+            function handleVoiceCommand(command) {
+                command = command.toLowerCase();
+                if (command.includes("toggle theme")) {
+                    themeToggle.click();
+                } else if (command.includes("show weather")) {
+                    document.querySelector('a[href="/weather"]').click();
+                }
+            }
+
+            socket.on("weatherUpdate", (data) => {
+                updateWeatherDisplay(data);
+            });
+
+            function updateWeatherDisplay(data) {
+                const weatherDisplay = document.getElementById("weather-display");
+                weatherDisplay.innerHTML = `
+                    <p>Temperature: ${data.temperature}°C</p>
+                    <p>Pressure: ${data.pressure} hPa</p>
+                    <p>Wind Speed: ${data.windSpeed} m/s</p>
+                `;
+            }
+
+            if ("serviceWorker" in navigator) {
+                navigator.serviceWorker
+                    .register("/service-worker.js")
+                    .then((registration) => {
+                        console.log("Service Worker registered with scope:", registration.scope);
+                    })
+                    .catch((error) => {
+                        console.error("Service Worker registration failed:", error);
+                    });
+            }
+        </script>
     </body>
 </html>

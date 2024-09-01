@@ -8,7 +8,9 @@
         "start": "node index.js",
         "dev": "nodemon index.js",
         "lint": "eslint .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "test": "jest",
+        "build": "webpack --mode production"
     },
     "dependencies": {
         "compression": "^1.7.4",
@@ -19,7 +21,9 @@
         "express-session": "^1.18.0",
         "helmet": "^7.1.0",
         "morgan": "^1.10.0",
-        "socket.io": "^4.7.5"
+        "socket.io": "^4.7.5",
+        "three": "^0.149.0",
+        "chart.js": "^4.2.1"
     },
     "devDependencies": {
         "@eslint/js": "^9.9.1",

@@ -1,55 +1,55 @@
 version: "3.8"
 
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      NODE_ENV: production
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-    volumes:
-      - ./public:/app/public
-      - ./views:/app/views
-    networks:
-      - app-network
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "3000:3000"
+        environment:
+            NODE_ENV: production
+        restart: unless-stopped
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+            interval: 30s
+            timeout: 10s
+            retries: 3
+        volumes:
+            - ./public:/app/public
+            - ./views:/app/views
+        networks:
+            - app-network
 
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      - app-network
+    prometheus:
+        image: prom/prometheus
+        volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+        ports:
+            - "9090:9090"
+        networks:
+            - app-network
 
-  grafana:
-    image: grafana/grafana
-    volumes:
-      - ./grafana-dashboard.json:/etc/grafana/provisioning/dashboards/mars-dashboard.json
-    ports:
-      - "3001:3000"
-    depends_on:
-      - prometheus
-    networks:
-      - app-network
+    grafana:
+        image: grafana/grafana
+        volumes:
+            - ./grafana-dashboard.json:/etc/grafana/provisioning/dashboards/mars-dashboard.json
+        ports:
+            - "3001:3000"
+        depends_on:
+            - prometheus
+        networks:
+            - app-network
 
-  cdn:
-    image: nginx:alpine
-    volumes:
-      - ./public:/usr/share/nginx/html
-    ports:
-      - "8080:80"
-    networks:
-      - app-network
+    cdn:
+        image: nginx:alpine
+        volumes:
+            - ./public:/usr/share/nginx/html
+        ports:
+            - "8080:80"
+        networks:
+            - app-network
 
 networks:
-  app-network:
-    driver: bridge
+    app-network:
+        driver: bridge
