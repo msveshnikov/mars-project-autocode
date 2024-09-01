@@ -1,9 +1,9 @@
 // public/js/web.js
 
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
-import { GUI } from "dat.gui";
-import Chart from "chart.js/auto";
+import * as THREE from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { GUI } from 'dat.gui';
+import Chart from 'chart.js/auto';
 
 class MarsApp {
   constructor() {
@@ -40,7 +40,7 @@ class MarsApp {
   setupRenderer() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    document.getElementById("scene-container").appendChild(this.renderer.domElement);
+    document.getElementById('scene-container').appendChild(this.renderer.domElement);
   }
 
   setupCamera() {
@@ -123,16 +123,16 @@ class MarsApp {
 
   setupGUI() {
     this.gui = new GUI();
-    this.gui.add(this.settings, "terrainResolution", 16, 256, 16).onChange(() => this.createTerrain());
-    this.gui.add(this.settings, "terrainHeight", 0, 20).onChange(() => this.updateTerrainGeometry());
-    this.gui.add(this.settings, "atmosphereIntensity", 0, 2).onChange((value) => {
+    this.gui.add(this.settings, 'terrainResolution', 16, 256, 16).onChange(() => this.createTerrain());
+    this.gui.add(this.settings, 'terrainHeight', 0, 20).onChange(() => this.updateTerrainGeometry());
+    this.gui.add(this.settings, 'atmosphereIntensity', 0, 2).onChange((value) => {
       this.atmosphere.material.uniforms.atmosphereIntensity.value = value;
     });
-    this.gui.add(this.settings, "dayNightCycle");
+    this.gui.add(this.settings, 'dayNightCycle');
   }
 
   addEventListeners() {
-    window.addEventListener("resize", () => this.onWindowResize(), false);
+    window.addEventListener('resize', () => this.onWindowResize(), false);
   }
 
   onWindowResize() {
@@ -162,16 +162,16 @@ function initializeApp() {
 
 async function fetchWeatherData() {
   try {
-    const response = await fetch("/api/weather");
+    const response = await fetch('/api/weather');
     const weatherData = await response.json();
     updateWeatherDisplay(weatherData);
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error('Error fetching weather data:', error);
   }
 }
 
 function updateWeatherDisplay(weatherData) {
-  const weatherDisplay = document.getElementById("weather-display");
+  const weatherDisplay = document.getElementById('weather-display');
   weatherDisplay.innerHTML = `
     <p>Temperature: ${weatherData.temperature}°C</p>
     <p>Pressure: ${weatherData.pressure} hPa</p>
@@ -181,36 +181,36 @@ function updateWeatherDisplay(weatherData) {
 
 async function fetchMarsFacts() {
   try {
-    const response = await fetch("/api/facts");
+    const response = await fetch('/api/facts');
     const facts = await response.json();
     updateFactsList(facts);
   } catch (error) {
-    console.error("Error fetching Mars facts:", error);
+    console.error('Error fetching Mars facts:', error);
   }
 }
 
 function updateFactsList(facts) {
-  const factsList = document.getElementById("facts-list");
-  factsList.innerHTML = "";
+  const factsList = document.getElementById('facts-list');
+  factsList.innerHTML = '';
   facts.forEach((fact) => {
-    const li = document.createElement("li");
+    const li = document.createElement('li');
     li.textContent = fact.content;
     factsList.appendChild(li);
   });
 }
 
 function initializeDataVisualization() {
-  const ctx = document.getElementById("chart-container").getContext("2d");
+  const ctx = document.getElementById('chart-container').getContext('2d');
   new Chart(ctx, {
-    type: "bar",
+    type: 'bar',
     data: {
-      labels: ["Temperature", "Pressure", "Wind Speed"],
+      labels: ['Temperature', 'Pressure', 'Wind Speed'],
       datasets: [
         {
-          label: "Mars Weather Data",
+          label: 'Mars Weather Data',
           data: [20, 6.1, 7.2],
-          backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)"],
-          borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)"],
+          backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)'],
+          borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)'],
           borderWidth: 1,
         },
       ],
@@ -226,6 +226,6 @@ function initializeDataVisualization() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initializeApp);
+document.addEventListener('DOMContentLoaded', initializeApp);
 
 export { MarsApp };

@@ -1,0 +1,16 @@
+{
+    "name": "Mars Project",
+    "short_name": "Mars",
+    "description": "An immersive and interactive experience for exploring the Red Planet",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#FF4500",
+    "orientation": "any",
+    "categories": ["education", "science", "entertainment"],
+    "lang": "en-US",
+    "dir": "ltr",
+    "prefer_related_applications": false,
+    "related_applications": [],
+    "scope": "/"
+}
