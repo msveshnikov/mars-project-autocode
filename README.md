@@ -33,7 +33,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Linting: ESLint with custom configuration
 -   CSS Framework: Tailwind CSS
 
-
 ## Getting Started
 
 1. Clone the repository
@@ -53,7 +52,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Deploy to cloud platforms (AWS, Google Cloud, or Azure)
 -   Implement CI/CD pipeline using GitHub Actions
 
-
 ## Future Enhancements
 
 -   Virtual Reality (VR) support
@@ -68,8 +66,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Social sharing features for discoveries and experiences
 -   Integration with educational platforms for classroom use
 
-
-
 ## Contributing
 
 Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
@@ -83,9 +79,3 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
-
-# TODO
-
--   fix  all those references import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
- import { GUI } from "dat.gui";
- import Chart from "chart.js/auto";
