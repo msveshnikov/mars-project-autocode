@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Mars Project Modernization</title>
         <link rel="stylesheet" href="/css/styles.css" />
-        <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#FF4500" />
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
         <script type="importmap">
@@ -17,8 +16,8 @@
             }
         </script>
     </head>
-    <body class="bg-gray-100">
-        <header class="bg-red-800 text-white p-4">
+    <body class="bg-gray-100 dark:bg-gray-900">
+        <header class="bg-red-800 text-white p-4 fixed top-0 left-0 right-0 z-50">
             <nav class="container mx-auto flex justify-between items-center">
                 <ul class="flex space-x-4">
                     <li><a href="/" class="hover:text-gray-300">Home</a></li>
@@ -28,25 +27,62 @@
             </nav>
         </header>
 
-        <main class="container mx-auto mt-8">
+        <main class="container mx-auto mt-20 p-4">
             <section id="mars-terrain" class="mb-8">
-                <h1 class="text-3xl font-bold mb-4" data-i18n="marsVisualization">Mars Visualization</h1>
+                <h1 class="text-3xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="marsVisualization">
+                    Mars Visualization
+                </h1>
                 <div id="scene-container" class="w-full h-96 bg-black rounded"></div>
             </section>
 
             <section id="weather-simulation" class="mb-8">
-                <h2 class="text-2xl font-bold mb-4" data-i18n="weatherSimulation">Weather Simulation</h2>
-                <div id="weather-display" class="bg-white p-4 rounded shadow"></div>
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="weatherSimulation">
+                    Weather Simulation
+                </h2>
+                <div id="weather-display" class="bg-white dark:bg-gray-800 p-4 rounded shadow"></div>
             </section>
 
             <section id="mars-facts" class="mb-8">
-                <h2 class="text-2xl font-bold mb-4" data-i18n="marsFacts">Mars Facts</h2>
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="marsFacts">Mars Facts</h2>
                 <ul id="facts-list" class="list-disc list-inside"></ul>
             </section>
 
             <section id="data-visualization" class="mb-8">
-                <h2 class="text-2xl font-bold mb-4" data-i18n="dataVisualization">Data Visualization</h2>
-                <canvas id="chart-container" class="bg-white p-4 rounded shadow"></canvas>
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="dataVisualization">
+                    Data Visualization
+                </h2>
+                <canvas id="chart-container" class="bg-white dark:bg-gray-800 p-4 rounded shadow h-64"></canvas>
+            </section>
+
+            <section id="theme-switcher" class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="themeSwitch">
+                    Theme Switch
+                </h2>
+                <button id="theme-toggle" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Toggle Theme
+                </button>
+            </section>
+
+            <section id="vr-ar-features" class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="vrArFeatures">
+                    VR/AR Features
+                </h2>
+                <button id="vr-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">
+                    Enter VR
+                </button>
+                <button id="ar-button" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+                    Start AR
+                </button>
+            </section>
+
+            <section id="voice-commands" class="mb-8">
+                <h2 class="text-2xl font-bold mb-4 text-red-600 dark:text-red-400" data-i18n="voiceCommands">
+                    Voice Commands
+                </h2>
+                <button id="start-voice" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                    Start Voice Recognition
+                </button>
+                <p id="voice-output" class="mt-2"></p>
             </section>
         </main>
 

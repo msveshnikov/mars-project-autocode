@@ -77,4 +77,4 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 
 # TODO
 
--   fix Error: "bar" is not a registered controller.
+-   add nice hero image to landing (/public/images/hero.avif)

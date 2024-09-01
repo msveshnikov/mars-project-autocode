@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mars Project Modernization</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
+    <header class="bg-red-800 text-white p-4 fixed top-0 left-0 right-0 z-50">
+        <nav class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">Mars Project</h1>
+            <ul class="flex space-x-4">
+                <li><a href="#home" class="hover:text-gray-300">Home</a></li>
+                <li><a href="#features" class="hover:text-gray-300">Features</a></li>
+                <li><a href="#tech-stack" class="hover:text-gray-300">Tech Stack</a></li>
+                <li><a href="#get-started" class="hover:text-gray-300">Get Started</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="pt-16">
+        <section id="home" class="bg-cover bg-center h-screen flex items-center" style="background-image: url('/images/hero.avif');">
+            <div class="container mx-auto text-center text-white">
+                <h2 class="text-5xl font-bold mb-4">Mars Project Modernization</h2>
+                <p class="text-xl mb-8">Explore Mars with cutting-edge technology</p>
+                <a href="/explore" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Explore Mars</a>
+                <a href="/weather" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Check Weather</a>
+            </div>
+        </section>
+
+        <section id="features" class="py-16 bg-white dark:bg-gray-800">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">Key Features</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Interactive 3D Mars Terrain</h3>
+                        <p>Explore Mars surface in high-detail 3D</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Real-time Weather Simulation</h3>
+                        <p>Experience dynamic Martian weather patterns</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Data Visualization Tools</h3>
+                        <p>Analyze Mars statistics with interactive charts</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-6 rounded-lg shadow-md">
+                        <h3 class="text-xl font-semibold mb-4">Dynamic Theming</h3>
+                        <p>Adaptive interface based on Mars time of day</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack" class="py-16 bg-gray-200 dark:bg-gray-900">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">Technology Stack</h2>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">HTML5</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">CSS3</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">JavaScript (ES6+)</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">Node.js</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">Express.js</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">Three.js</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">EJS</span>
+                    <span class="bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow">Tailwind CSS</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="get-started" class="py-16 bg-white dark:bg-gray-800">
+            <div class="container mx-auto">
+                <h2 class="text-3xl font-bold mb-8 text-center">Get Started</h2>
+                <div class="max-w-2xl mx-auto">
+                    <ol class="list-decimal list-inside mb-8">
+                        <li class="mb-2">Clone the repository</li>
+                        <li class="mb-2">Install dependencies: <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">npm install</code></li>
+                        <li class="mb-2">Start the development server: <code class="bg-gray-200 dark:bg-gray-700 px-2 py-1 rounded">npm run dev</code></li>
+                    </ol>
+                    <div class="text-center">
+                        <a href="https://github.com/yourusername/mars-project" target="_blank" rel="noopener noreferrer" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Mars Project Modernization. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

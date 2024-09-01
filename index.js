@@ -45,7 +45,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.get("/", (req, res) => {
-    res.render("main");
+    res.render("landing");
 });
 
 app.get("/explore", (req, res) => {
@@ -64,10 +64,7 @@ app.get("/api/terrain", (req, res) => {
 app.get("/api/facts", (req, res) => {
     const facts = [
         { id: 1, content: "Mars is the fourth planet from the Sun." },
-        {
-            id: 2,
-            content: "Mars is often called the Red Planet due to its reddish appearance.",
-        },
+        { id: 2, content: "Mars is often called the Red Planet due to its reddish appearance." },
         { id: 3, content: "Mars has two small moons, Phobos and Deimos." },
     ];
     res.json(facts);
