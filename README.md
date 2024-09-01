@@ -14,7 +14,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   `eslint.config.mjs`: ESLint configuration for code quality
 -   `Dockerfile`: Container configuration for deployment
 -   `docker-compose.yml`: Multi-container Docker setup
--   `ci-cd.yml`: CI/CD pipeline configuration
 -   `prometheus.yml`: Prometheus configuration for monitoring
 -   `grafana-dashboard.json`: Grafana dashboard for visualizing metrics
 
@@ -30,6 +29,8 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Containerized deployment with Docker
 -   Automated CI/CD pipeline
 -   Prometheus and Grafana integration for monitoring and analytics
+-   WebSocket integration for real-time updates
+-   Dark mode toggle for improved user experience
 
 ## Technology Stack
 
@@ -54,12 +55,17 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Use ESLint for code linting with custom rules
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
+-   Implement responsive design using Tailwind CSS
+-   Follow accessibility guidelines (WCAG 2.1)
+-   Write unit and integration tests using Jest
 
 ## Deployment
 
 -   Build and run Docker containers: `docker-compose up --build`
 -   CI/CD pipeline automatically deploys to staging and production environments
--   Monitor application performance using Prometheus and Grafana
+    Monitor application performance using Prometheus and Grafana
+-   Use environment variables for configuration management
+
 
 ## Future Enhancements
 
@@ -71,6 +77,10 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Voice commands and natural language processing for navigation
 -   Machine learning models for predictive Mars weather forecasting
 -   Integration with satellite imagery APIs for real-time surface updates
+-   Implement WebAssembly for performance-critical computations
+-   Add support for 3D printing of custom Mars terrain models
+-   Implement social sharing features for discoveries and screenshots
+-   Create an API for third-party developers to extend functionality
 
 ## Contributing
 
