@@ -1,23 +1,34 @@
 {
     "name": "mars-project-modernization",
     "version": "1.0.0",
-    "description": "Web-based Mars terrain visualization application",
+    "description": "Modernized Mars terrain visualization application",
     "main": "app.js",
     "scripts": {
         "start": "node app.js",
         "dev": "nodemon app.js",
         "lint": "eslint .",
-        "format": "prettier --write ."
+        "format": "prettier --write .",
+        "test": "jest"
     },
     "dependencies": {
         "express": "^4.17.1",
         "three": "^0.137.0",
         "dat.gui": "^0.7.7",
-        "express-session": "^1.17.2"
+        "express-session": "^1.17.2",
+        "i18next": "^21.6.10",
+        "i18next-http-middleware": "^3.1.4",
+        "i18next-fs-backend": "^1.1.4",
+        "passport": "^0.5.2",
+        "passport-local": "^1.0.0",
+        "bcrypt": "^5.0.1",
+        "mongodb": "^4.3.1",
+        "jsonwebtoken": "^8.5.1"
     },
     "devDependencies": {
         "nodemon": "^2.0.15",
-        "eslint": "^8.7.0"
+        "eslint": "^8.7.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-plugin-import": "^2.25.4"
     },
     "engines": {
         "node": ">=14.0.0"
