@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="/css/styles.css" />
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-matrix@1.1.1/dist/chartjs-chart-matrix.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
     </head>
     <body class="bg-gray-100">
@@ -59,25 +60,31 @@
             function createTemperatureMap(data) {
                 const ctx = document.getElementById("temperature-map").getContext("2d");
                 new Chart(ctx, {
-                    type: "heatmap",
+                    type: "matrix",
                     data: {
                         datasets: [
                             {
-                                data: data,
                                 label: "Temperature",
+                                data: data.map((d, i) => ({ x: i % 10, y: Math.floor(i / 10), v: d })),
+                                backgroundColor: (context) => {
+                                    const value = context.dataset.data[context.dataIndex].v;
+                                    const alpha = (value + 20) / 70;
+                                    return `rgba(255, 0, 0, ${alpha})`;
+                                },
+                                width: ({ chart }) => (chart.chartArea || {}).width / 10 - 1,
+                                height: ({ chart }) => (chart.chartArea || {}).height / 10 - 1,
                             },
                         ],
                     },
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                position: "top",
-                            },
-                            title: {
-                                display: true,
-                                text: "Mars Temperature Map",
-                            },
+                            legend: { position: "top" },
+                            title: { display: true, text: "Mars Temperature Map" },
+                        },
+                        scales: {
+                            x: { type: "linear", position: "bottom", min: 0, max: 9 },
+                            y: { type: "linear", min: 0, max: 9 },
                         },
                     },
                 });
@@ -86,25 +93,37 @@
             function createWindMap(data) {
                 const ctx = document.getElementById("wind-map").getContext("2d");
                 new Chart(ctx, {
-                    type: "vector",
+                    type: "scatter",
                     data: {
                         datasets: [
                             {
-                                data: data,
                                 label: "Wind",
+                                data: data.map((d, i) => ({
+                                    x: i % 10,
+                                    y: Math.floor(i / 10),
+                                    rotation: d.direction,
+                                    speed: d.speed,
+                                })),
+                                pointStyle: "line",
+                                rotation: (context) => context.raw.rotation,
+                                backgroundColor: (context) => {
+                                    const speed = context.raw.speed;
+                                    const alpha = speed / 10;
+                                    return `rgba(0, 0, 255, ${alpha})`;
+                                },
+                                pointRadius: 5,
                             },
                         ],
                     },
                     options: {
                         responsive: true,
                         plugins: {
-                            legend: {
-                                position: "top",
-                            },
-                            title: {
-                                display: true,
-                                text: "Mars Wind Map",
-                            },
+                            legend: { position: "top" },
+                            title: { display: true, text: "Mars Wind Map" },
+                        },
+                        scales: {
+                            x: { type: "linear", position: "bottom", min: 0, max: 9 },
+                            y: { type: "linear", min: 0, max: 9 },
                         },
                     },
                 });

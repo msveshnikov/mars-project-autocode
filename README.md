@@ -46,11 +46,9 @@ This project modernizes and resurrects the Mars application using contemporary t
 ## Development
 
 -   Use ESLint for code linting with custom rules
--   Follow Airbnb JavaScript Style Guide
 -   Use Git flow for version control
 -   Utilize EJS templates for server-side rendering
 -   Implement lazy loading for performance optimization
--   Use Web Workers for computationally intensive tasks
 
 ## Deployment
 

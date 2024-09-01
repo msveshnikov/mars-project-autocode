@@ -16,9 +16,9 @@ class MarsApp {
         this.gui = null;
         this.clock = new THREE.Clock();
         this.settings = {
-            terrainResolution: 512,
-            terrainHeight: 10,
-            atmosphereIntensity: 1,
+            terrainResolution: 112,
+            terrainHeight: 5,
+            atmosphereIntensity: 2,
             dayNightCycle: true,
             autoRotate: true,
         };
@@ -255,7 +255,6 @@ function initializeApp() {
     fetchWeatherData();
     fetchMarsFacts();
     initializeDataVisualization();
-    setupOfflineSupport();
     setupDynamicTheming();
 }
 
@@ -323,21 +322,6 @@ function initializeDataVisualization() {
             responsive: true,
         },
     });
-}
-
-function setupOfflineSupport() {
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-            navigator.serviceWorker.register("/service-worker.js").then(
-                (registration) => {
-                    console.log("ServiceWorker registration successful with scope: ", registration.scope);
-                },
-                (err) => {
-                    console.log("ServiceWorker registration failed: ", err);
-                }
-            );
-        });
-    }
 }
 
 function setupDynamicTheming() {
