@@ -81,3 +81,17 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
+
+
+# TODO
+
+-   add weather map (temperature and wind)
+-   fix web.js:3 Uncaught SyntaxError: Cannot use import statement outside a moduleUnderstand this error
+chart.js:19 Uncaught (in promise) Error: "heatmap" is not a registered controller.
+    at tn._get (chart.js:19:82714)
+    at tn.getController (chart.js:19:81782)
+    at An.buildOrUpdateControllers (chart.js:19:93768)
+    at An.update (chart.js:19:94518)
+    at new An (chart.js:19:90881)
+    at createTemperatureMap (weather:39:17)
+    at weather:95:21

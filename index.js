@@ -52,6 +52,10 @@ app.get("/explore", (req, res) => {
     res.render("main");
 });
 
+app.get("/weather", (req, res) => {
+    res.render("weather");
+});
+
 app.get("/api/terrain", (req, res) => {
     const terrain = generateTerrain();
     res.json(terrain);
@@ -60,7 +64,10 @@ app.get("/api/terrain", (req, res) => {
 app.get("/api/facts", (req, res) => {
     const facts = [
         { id: 1, content: "Mars is the fourth planet from the Sun." },
-        { id: 2, content: "Mars is often called the Red Planet due to its reddish appearance." },
+        {
+            id: 2,
+            content: "Mars is often called the Red Planet due to its reddish appearance.",
+        },
         { id: 3, content: "Mars has two small moons, Phobos and Deimos." },
     ];
     res.json(facts);
@@ -74,6 +81,11 @@ app.get("/api/weather", (req, res) => {
 app.get("/api/statistics", (req, res) => {
     const statistics = generateStatistics();
     res.json(statistics);
+});
+
+app.get("/api/weather-map", (req, res) => {
+    const weatherMap = generateWeatherMap();
+    res.json(weatherMap);
 });
 
 function generateTerrain() {
@@ -108,6 +120,23 @@ function generateStatistics() {
             argon: 1.6,
         },
     };
+}
+
+function generateWeatherMap() {
+    const size = 64;
+    const temperatureMap = new Float32Array(size * size);
+    const windMap = new Float32Array(size * size * 2);
+
+    for (let i = 0; i < size; i++) {
+        for (let j = 0; j < size; j++) {
+            const index = i * size + j;
+            temperatureMap[index] = Math.round((Math.random() * 60 - 30) * 10) / 10;
+            windMap[index * 2] = Math.round(Math.random() * 100) / 10;
+            windMap[index * 2 + 1] = Math.round(Math.random() * 360);
+        }
+    }
+
+    return { temperatureMap, windMap };
 }
 
 io.on("connection", (socket) => {

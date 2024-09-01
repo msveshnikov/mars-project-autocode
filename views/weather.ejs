@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mars Weather Map</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Mars Weather Map</h1>
+        </header>
+        <main>
+            <section id="weather-map">
+                <canvas id="temperature-map"></canvas>
+                <canvas id="wind-map"></canvas>
+            </section>
+            <section id="weather-data">
+                <h2>Current Weather</h2>
+                <p>Temperature: <span id="temperature"></span>°C</p>
+                <p>Pressure: <span id="pressure"></span> hPa</p>
+                <p>Wind Speed: <span id="wind-speed"></span> m/s</p>
+            </section>
+        </main>
+        <script src="/js/web.js"></script>
+        <script>
+            const socket = io();
+
+            function updateWeatherData(data) {
+                document.getElementById("temperature").textContent = data.temperature;
+                document.getElementById("pressure").textContent = data.pressure;
+                document.getElementById("wind-speed").textContent = data.windSpeed;
+            }
+
+            function createTemperatureMap(data) {
+                const ctx = document.getElementById("temperature-map").getContext("2d");
+                new Chart(ctx, {
+                    type: "heatmap",
+                    data: {
+                        datasets: [
+                            {
+                                data: data,
+                                label: "Temperature",
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: "top",
+                            },
+                            title: {
+                                display: true,
+                                text: "Mars Temperature Map",
+                            },
+                        },
+                    },
+                });
+            }
+
+            function createWindMap(data) {
+                const ctx = document.getElementById("wind-map").getContext("2d");
+                new Chart(ctx, {
+                    type: "vector",
+                    data: {
+                        datasets: [
+                            {
+                                data: data,
+                                label: "Wind",
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: "top",
+                            },
+                            title: {
+                                display: true,
+                                text: "Mars Wind Map",
+                            },
+                        },
+                    },
+                });
+            }
+
+            fetch("/api/weather")
+                .then((response) => response.json())
+                .then((data) => {
+                    updateWeatherData(data);
+                    createTemperatureMap(data.temperatureMap);
+                    createWindMap(data.windMap);
+                });
+
+            socket.on("weatherUpdate", (data) => {
+                updateWeatherData(data);
+            });
+        </script>
+    </body>
+</html>
