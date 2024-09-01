@@ -3,7 +3,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GUI } from "https://cdn.jsdelivr.net/npm/lil-gui@0.17/+esm";
-import Chart from "https://cdn.jsdelivr.net/npm/chart.js@4.2.1/+esm";
+import { Chart } from "https://cdn.jsdelivr.net/npm/chart.js@4.2.1/+esm";
 
 class MarsApp {
     constructor() {

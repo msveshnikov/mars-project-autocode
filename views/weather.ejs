@@ -9,8 +9,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
     </head>
     <body>
-        <header>
-            <h1>Mars Weather Map</h1>
+        <header class="bg-red-800 text-white p-4">
+            <nav class="container mx-auto flex justify-between items-center">
+                <ul class="flex space-x-4">
+                    <li><a href="/" class="hover:text-gray-300">Home</a></li>
+                    <li><a href="/explore" class="hover:text-gray-300">Explore</a></li>
+                    <li><a href="/weather" class="hover:text-gray-300">Weather</a></li>
+                </ul>
+            </nav>
         </header>
         <main>
             <section id="weather-map">
@@ -24,7 +30,10 @@
                 <p>Wind Speed: <span id="wind-speed"></span> m/s</p>
             </section>
         </main>
-        <script src="/js/web.js"></script>
+        <footer>
+            <p>&copy; 2023 Mars Project</p>
+        </footer>
+        <!-- <script src="/js/web.js"></script> -->
         <script>
             const socket = io();
 
