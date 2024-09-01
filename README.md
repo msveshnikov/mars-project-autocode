@@ -95,3 +95,9 @@ This project is licensed under the MIT License - see the LICENSE.md file for det
 -   NASA for providing Mars data and imagery
 -   OpenAI for AI-assisted development
 -   The open-source community for invaluable tools and libraries
+
+# TODO
+
+-   get rid of any i18n or multilanguage
+-   get rid of PWA fully
+-   make Data Visualizations small (on  main page)
