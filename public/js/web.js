@@ -16,7 +16,7 @@ class MarsApp {
         this.gui = null;
         this.clock = new THREE.Clock();
         this.settings = {
-            terrainResolution: 128,
+            terrainResolution: 512,
             terrainHeight: 10,
             atmosphereIntensity: 1,
             dayNightCycle: true,
@@ -68,12 +68,16 @@ class MarsApp {
 
     createTerrain() {
         const geometry = new THREE.PlaneGeometry(
-            100,
-            100,
+            200,
+            200,
             this.settings.terrainResolution,
             this.settings.terrainResolution
         );
-        const material = new THREE.MeshPhongMaterial({ color: 0xaa6633, wireframe: false });
+        const material = new THREE.MeshPhongMaterial({
+            color: 0xaa6633,
+            wireframe: false,
+            flatShading: true,
+        });
         this.terrain = new THREE.Mesh(geometry, material);
         this.terrain.rotation.x = -Math.PI / 2;
         this.updateTerrainGeometry();
@@ -92,11 +96,17 @@ class MarsApp {
     }
 
     generateHeight(x, y) {
-        return this.settings.terrainHeight * (Math.sin(x * 0.1) + Math.cos(y * 0.1));
+        const noise = new SimplexNoise();
+        return (
+            this.settings.terrainHeight *
+            (noise.noise2D(x * 0.05, y * 0.05) +
+                0.5 * noise.noise2D(x * 0.1, y * 0.1) +
+                0.25 * noise.noise2D(x * 0.2, y * 0.2))
+        );
     }
 
     createAtmosphere() {
-        const geometry = new THREE.SphereGeometry(60, 32, 32);
+        const geometry = new THREE.SphereGeometry(120, 64, 64);
         const material = new THREE.ShaderMaterial({
             uniforms: {
                 atmosphereIntensity: { value: this.settings.atmosphereIntensity },
@@ -113,7 +123,7 @@ class MarsApp {
         varying vec3 vNormal;
         void main() {
           float intensity = pow(0.7 - dot(vNormal, vec3(0.0, 0.0, 1.0)), 4.0);
-          gl_FragColor = vec4(0.3, 0.6, 1.0, intensity * atmosphereIntensity);
+          gl_FragColor = vec4(0.6, 0.3, 0.1, intensity * atmosphereIntensity);
         }
       `,
             transparent: true,
@@ -126,7 +136,7 @@ class MarsApp {
 
     setupGUI() {
         this.gui = new GUI();
-        this.gui.add(this.settings, "terrainResolution", 16, 256, 16).onChange(() => this.createTerrain());
+        this.gui.add(this.settings, "terrainResolution", 128, 1024, 128).onChange(() => this.createTerrain());
         this.gui.add(this.settings, "terrainHeight", 0, 20).onChange(() => this.updateTerrainGeometry());
         this.gui.add(this.settings, "atmosphereIntensity", 0, 2).onChange((value) => {
             this.atmosphere.material.uniforms.atmosphereIntensity.value = value;
@@ -159,11 +169,94 @@ class MarsApp {
     }
 }
 
+class SimplexNoise {
+    constructor() {
+        this.grad3 = [
+            [1, 1, 0],
+            [-1, 1, 0],
+            [1, -1, 0],
+            [-1, -1, 0],
+            [1, 0, 1],
+            [-1, 0, 1],
+            [1, 0, -1],
+            [-1, 0, -1],
+            [0, 1, 1],
+            [0, -1, 1],
+            [0, 1, -1],
+            [0, -1, -1],
+        ];
+        this.p = [];
+        for (let i = 0; i < 256; i++) {
+            this.p[i] = Math.floor(Math.random() * 256);
+        }
+        this.perm = [];
+        for (let i = 0; i < 512; i++) {
+            this.perm[i] = this.p[i & 255];
+        }
+    }
+
+    dot(g, x, y) {
+        return g[0] * x + g[1] * y;
+    }
+
+    noise2D(xin, yin) {
+        let n0, n1, n2;
+        const F2 = 0.5 * (Math.sqrt(3.0) - 1.0);
+        const s = (xin + yin) * F2;
+        const i = Math.floor(xin + s);
+        const j = Math.floor(yin + s);
+        const G2 = (3.0 - Math.sqrt(3.0)) / 6.0;
+        const t = (i + j) * G2;
+        const X0 = i - t;
+        const Y0 = j - t;
+        const x0 = xin - X0;
+        const y0 = yin - Y0;
+        let i1, j1;
+        if (x0 > y0) {
+            i1 = 1;
+            j1 = 0;
+        } else {
+            i1 = 0;
+            j1 = 1;
+        }
+        const x1 = x0 - i1 + G2;
+        const y1 = y0 - j1 + G2;
+        const x2 = x0 - 1.0 + 2.0 * G2;
+        const y2 = y0 - 1.0 + 2.0 * G2;
+        const ii = i & 255;
+        const jj = j & 255;
+        const gi0 = this.perm[ii + this.perm[jj]] % 12;
+        const gi1 = this.perm[ii + i1 + this.perm[jj + j1]] % 12;
+        const gi2 = this.perm[ii + 1 + this.perm[jj + 1]] % 12;
+        let t0 = 0.5 - x0 * x0 - y0 * y0;
+        if (t0 < 0) n0 = 0.0;
+        else {
+            t0 *= t0;
+            n0 = t0 * t0 * this.dot(this.grad3[gi0], x0, y0);
+        }
+        let t1 = 0.5 - x1 * x1 - y1 * y1;
+        if (t1 < 0) n1 = 0.0;
+        else {
+            t1 *= t1;
+            n1 = t1 * t1 * this.dot(this.grad3[gi1], x1, y1);
+        }
+        let t2 = 0.5 - x2 * x2 - y2 * y2;
+        if (t2 < 0) n2 = 0.0;
+        else {
+            t2 *= t2;
+            n2 = t2 * t2 * this.dot(this.grad3[gi2], x2, y2);
+        }
+        return 70.0 * (n0 + n1 + n2);
+    }
+}
+
 function initializeApp() {
     new MarsApp();
     fetchWeatherData();
     fetchMarsFacts();
     initializeDataVisualization();
+    setupOfflineSupport();
+    setupDynamicTheming();
 }
 
 async function fetchWeatherData() {
@@ -230,6 +323,27 @@ function initializeDataVisualization() {
             responsive: true,
         },
     });
+}
+
+function setupOfflineSupport() {
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker.register("/service-worker.js").then(
+                (registration) => {
+                    console.log("ServiceWorker registration successful with scope: ", registration.scope);
+                },
+                (err) => {
+                    console.log("ServiceWorker registration failed: ", err);
+                }
+            );
+        });
+    }
+}
+
+function setupDynamicTheming() {
+    const hour = new Date().getHours();
+    const isDaytime = hour >= 6 && hour < 18;
+    document.body.classList.toggle("night-mode", !isDaytime);
 }
 
 document.addEventListener("DOMContentLoaded", initializeApp);

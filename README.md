@@ -59,9 +59,6 @@ This project modernizes and resurrects the Mars application using contemporary t
 -   Implement CI/CD pipeline using GitHub Actions
 -   Use CDN for static asset delivery
 
-
-
-
 ## Future Enhancements
 
 -   Virtual Reality (VR) support using WebXR
